@@ -1,0 +1,1 @@
+inject into FiveM_bXXXX_DumpServer
