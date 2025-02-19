@@ -24,7 +24,7 @@ const char** __fastcall Hook(const char** a1, const char* a2, ...)
     return result;
 }
 
-DWORD WINAPI InitLogBypass(LPVOID) 
+DWORD WINAPI InitLogBypass() 
 {
     DWORD oldProtect;
     if (!VirtualProtect(function, 1, PAGE_EXECUTE_READWRITE, &oldProtect))
