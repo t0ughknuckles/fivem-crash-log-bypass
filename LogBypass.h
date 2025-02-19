@@ -19,18 +19,14 @@ const char** __fastcall Hook(const char** a1, const char* a2, ...)
         a2 = "https://google.com/";
 
     const char* modified_args[] = { a2, va_arg(args, const char*) };
-
     const char** result = function(a1, modified_args[0], modified_args[1]);
-
     va_end(args);
-
     return result;
 }
 
 DWORD WINAPI InitLogBypass(LPVOID) 
 {
     DWORD oldProtect;
-
     if (!VirtualProtect(function, 1, PAGE_EXECUTE_READWRITE, &oldProtect))
     {
         MessageBoxA(0, "failed to change mem protection", "err", MB_OK | MB_ICONERROR);
