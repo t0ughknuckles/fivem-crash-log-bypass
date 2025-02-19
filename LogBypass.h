@@ -5,10 +5,10 @@
 #include "detours.h"
 #pragma comment(lib, "detours-x64.lib")
 
-typedef const char** (__fastcall* tsub_func)(const char**, const char*, ...);
+typedef const char** (__fastcall* sub_func)(const char**, const char*, ...);
 
 uintptr_t baseAddress = (uintptr_t)GetModuleHandle(0);
-tsub_func function = (tsub_func)(baseAddress + 0x6E4A0);
+sub_func function = (sub_func)(baseAddress + 0x6E4A0);
 
 const char** __fastcall Hook(const char** a1, const char* a2, ...)
 {
@@ -26,8 +26,8 @@ const char** __fastcall Hook(const char** a1, const char* a2, ...)
 
 DWORD WINAPI InitLogBypass() 
 {
-    DWORD oldProtect;
-    if (!VirtualProtect(function, 1, PAGE_EXECUTE_READWRITE, &oldProtect))
+    DWORD old;
+    if (!VirtualProtect(function, 1, PAGE_EXECUTE_READWRITE, &old))
     {
         MessageBoxA(0, "failed to change mem protection", "err", MB_OK | MB_ICONERROR);
         return 1;
